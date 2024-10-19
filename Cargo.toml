@@ -1,0 +1,28 @@
+cargo-features = ["codegen-backend"]
+[package]
+name = "chat"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7.7", features = ["macros", "ws"] }
+axum-login = "0.16.0"
+bon = "2.3.0"
+chrono = "0.4.38"
+dotenvy = "0.15.7"
+eyre = "0.6.12"
+sqlx = { version = "0.8.2", features = ["sqlite", "derive", "runtime-tokio", "chrono", "uuid"] }
+strum = { version = "0.26.3", features = ["derive"] }
+thiserror = "1.0.64"
+tokio = { version = "1.40.0", features = ["full"] }
+tower = "0.5.1"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+uuid = { version = "1.11.0", features = ["v4"] }
+
+[profile.dev]
+debug = 0
+codegen-backend = "cranelift"
+
+[profile.dev.package.sqlx-macros]
+opt-level = 3
